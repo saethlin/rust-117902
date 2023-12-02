@@ -583,9 +583,9 @@ impl<G: GlobalIdentityHandlerFactory> Global<G> {
 
         let device = device_guard.get(device_id).unwrap();
 
-        let _texture = device.create_texture(desc).unwrap();
+        let _texture = device.create_texture(desc);
 
-        panic!()
+        loop {}
     }
 
     /// # Safety

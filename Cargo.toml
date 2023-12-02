@@ -9,3 +9,9 @@ edition = "2021"
 wgpu = { path = "wgpu" } 
 futures-lite = "1.12"
 wgpu-types = "=0.17.0"
+
+[patch.crates-io]
+wgpu-types = { path = "wgpu-types" }
+
+[profile.release]
+debug = 2

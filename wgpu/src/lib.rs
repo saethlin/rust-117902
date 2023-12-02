@@ -2430,20 +2430,11 @@ impl Device {
     /// Creates a new [`Texture`].
     ///
     /// `desc` specifies the general format of the texture.
+    #[inline(never)]
     pub fn create_texture(&self, desc: &TextureDescriptor) -> Texture {
-        let (id, data) =
+        let (_id, _data) =
             DynContext::device_create_texture(&*self.context, &self.id, self.data.as_ref(), desc);
-        Texture {
-            context: Arc::clone(&self.context),
-            id,
-            data,
-            owned: true,
-            descriptor: TextureDescriptor {
-                label: None,
-                view_formats: &[],
-                ..desc.clone()
-            },
-        }
+        loop {}
     }
 
     /// Creates a [`Texture`] from a wgpu-hal Texture.

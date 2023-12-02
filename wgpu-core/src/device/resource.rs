@@ -526,26 +526,13 @@ impl<A: HalApi> Device<A> {
     #[inline(never)]
     pub(super) fn create_texture(
         &self,
-        //self_id: id::DeviceId,
-        //adapter: &Adapter<A>,
         desc: &resource::TextureDescriptor,
     ) -> Result<resource::Texture<A>, resource::CreateTextureError> {
-        use wgt::DownlevelFlags;
-        use wgt::DownlevelLimits;
-        use wgt::ShaderModel;
 
         let format = desc.format;
 
-        assert!(self.features.contains(format.required_features()));
-
-        let downlevel = self.downlevel.flags.contains(DownlevelFlags::compliant())
-            && self.downlevel.limits == DownlevelLimits::default()
-            && self.downlevel.shader_model >= ShaderModel::Sm5;
-
-        if downlevel {
-            format.guaranteed_format_features(self.features);
-        }
- 
+        std::hint::black_box(format.required_features());
+        eprintln!("{:?}", format); // segfaults
         loop {}
     }
 

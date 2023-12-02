@@ -76,9 +76,9 @@ impl DeviceExt for crate::Device {
 
     fn create_texture_with_data(
         &self,
-        queue: &crate::Queue,
+        _queue: &crate::Queue,
         desc: &crate::TextureDescriptor,
-        data: &[u8],
+        _data: &[u8],
     ) -> crate::Texture {
         let _texture = self.create_texture(&desc);
         loop {}

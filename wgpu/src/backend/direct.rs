@@ -1307,27 +1307,12 @@ impl crate::Context for Context {
     ) -> (Self::TextureId, Self::TextureData) {
         let wgt_desc = desc.map_label_and_view_formats(|l| l.map(Borrowed), |v| v.to_vec());
         let global = &self.0;
-        let (id, error) = wgc::gfx_select!(device => global.device_create_texture(
+        let (_id, _error) = wgc::gfx_select!(device => global.device_create_texture(
             *device,
             &wgt_desc,
             ()
         ));
-        if let Some(cause) = error {
-            self.handle_error(
-                &device_data.error_sink,
-                cause,
-                LABEL,
-                desc.label,
-                "Device::create_texture",
-            );
-        }
-        (
-            id,
-            Texture {
-                id,
-                error_sink: Arc::clone(&device_data.error_sink),
-            },
-        )
+        loop {}
     }
     fn device_create_sampler(
         &self,
